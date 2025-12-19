@@ -1,0 +1,85 @@
+<div class="filters">
+
+  <!-- Search -->
+  <div class="filters__search">
+    <span class="filters__search-icon">🔍</span>
+    <input
+      class="filters__input"
+      type="text"
+      placeholder="Search events..."
+      [ngModel]="search()"
+      (ngModelChange)="onSearchChange($event)"
+    />
+  </div>
+
+  <!-- Dropdowns + Clear -->
+  <div class="filters__dropdowns">
+
+    <div class="filters__group">
+      <label class="filters__label">Status</label>
+      <select
+        class="filters__select"
+        [ngModel]="filters().status"
+        (ngModelChange)="onStatusChange($event)"
+      >
+        <option value="all">All statuses</option>
+        @for (opt of statusOptions; track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="filters__group">
+      <label class="filters__label">Category</label>
+      <select
+        class="filters__select"
+        [ngModel]="filters().category"
+        (ngModelChange)="onCategoryChange($event)"
+      >
+        <option value="all">All categories</option>
+        @for (opt of categoryOptions; track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+    </div>
+
+    <!-- Clear Filters button moved here -->
+    @if (hasActiveFilters()) {
+      <button
+        type="button"
+        class="btn btn--ghost"
+        (click)="clearAll()"
+      >
+        Clear Filters
+      </button>
+    }
+  </div>
+
+  <!-- Active filters chips BELOW -->
+  @if (hasActiveFilters()) {
+    <div class="filters__active">
+      <span>Active filters:</span>
+
+      @if (activeStatus()) {
+        <span class="filters__tag">
+          Status: {{ getStatusLabel(activeStatus()!) }}
+          <button type="button" (click)="clearStatus()">×</button>
+        </span>
+      }
+
+      @if (activeCategory()) {
+        <span class="filters__tag">
+          Category: {{ getCategoryLabel(activeCategory()!) }}
+          <button type="button" (click)="clearCategory()">×</button>
+        </span>
+      }
+
+      @if (activeSearch()) {
+        <span class="filters__tag">
+          Search: "{{ activeSearch() }}"
+          <button type="button" (click)="clearSearch()">×</button>
+        </span>
+      }
+    </div>
+  }
+</div>

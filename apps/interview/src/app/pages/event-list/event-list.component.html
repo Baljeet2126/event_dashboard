@@ -1,0 +1,77 @@
+<div class="event-list-page">
+  <div class="event-list-page__header">
+    <h1>Cultural Events</h1>
+    <p class="event-list-page__subtitle">
+      Discover concerts, opera, theater, and exhibitions
+    </p>
+  </div>
+
+  <app-event-filter
+    [filters]="filters()"
+    (filtersChange)="onFiltersChange($event)"
+    (reset)="onResetFilters()"
+  />
+
+  @if (hasStats()) {
+    <div class="event-list-page__stats">
+      <div class="stat">
+        <span class="stat__value">{{ eventCounts()!.total }}</span>
+        <span class="stat__label">Total</span>
+      </div>
+
+      <div class="stat">
+        <span class="stat__value">{{ eventCounts()!.published }}</span>
+        <span class="stat__label">Published</span>
+      </div>
+
+      <div class="stat">
+        <span class="stat__value">{{ eventCounts()!.draft }}</span>
+        <span class="stat__label">Draft</span>
+      </div>
+    </div>
+  }
+
+  <div class="event-list-page__content">
+
+    @if (loading()) {
+      <div class="loading">
+        <div class="loading__spinner"></div>
+        <p>Loading events...</p>
+      </div>
+    }
+
+    @if (error()) {
+      <div class="error">
+        <p>{{ error() }}</p>
+        <button class="btn btn--primary" (click)="loadEvents()">
+          Try Again
+        </button>
+      </div>
+    }
+
+    @if (showGrid()) {
+      <div class="event-grid">
+        @for (event of filteredEvents(); track event.id) {
+          <app-event-card
+            [cultureEvent]="event"
+            (onEdit)="editEvent($event)"
+            (onDelete)="deleteEvent($event)"
+            (onToggleStatus)="toggleStatus($event)"
+          />
+        }
+      </div>
+    }
+
+    @if (isEmpty()) {
+      <div class="empty-state">
+        <div class="empty-state__icon">🎭</div>
+        <h2>No events found</h2>
+        <p>Try adjusting your filters or create a new event.</p>
+        <button class="btn btn--primary" (click)="createEvent()">
+          Create Event
+        </button>
+      </div>
+    }
+
+  </div>
+</div>

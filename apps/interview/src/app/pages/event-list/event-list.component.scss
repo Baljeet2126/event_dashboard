@@ -1,0 +1,106 @@
+ .event-list-page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--spacing-lg);
+    }
+
+    .event-list-page__header {
+      margin-bottom: var(--spacing-lg);
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0 0 var(--spacing-xs);
+      }
+    }
+
+    .event-list-page__subtitle {
+      color: var(--color-text-muted);
+      margin: 0;
+    }
+
+    .event-list-page__stats {
+      display: flex;
+      gap: var(--spacing-lg);
+      margin: var(--spacing-lg) 0;
+    }
+
+    .stat {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: var(--spacing-md);
+      background: var(--color-surface);
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
+      min-width: 100px;
+    }
+
+    .stat__value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+
+    .stat__label {
+      font-size: 0.875rem;
+      color: var(--color-text-muted);
+    }
+
+    .event-list-page__content {
+      margin-top: var(--spacing-lg);
+    }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--spacing-lg);
+    }
+
+    .loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: var(--spacing-xl);
+      color: var(--color-text-muted);
+    }
+
+    .loading__spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--color-border);
+      border-top-color: var(--color-primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .error {
+      text-align: center;
+      padding: var(--spacing-xl);
+      color: var(--color-danger);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: var(--spacing-xl);
+
+      h2 {
+        margin: var(--spacing-md) 0 var(--spacing-xs);
+      }
+
+      p {
+        color: var(--color-text-muted);
+        margin-bottom: var(--spacing-md);
+      }
+    }
+
+    .empty-state__icon {
+      font-size: 4rem;
+    }

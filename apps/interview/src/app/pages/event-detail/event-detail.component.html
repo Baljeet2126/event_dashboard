@@ -1,0 +1,139 @@
+@if (event) {
+  <div class="event-detail">
+    <div class="event-detail__header">
+      <a routerLink="/" class="event-detail__back">← Back to Events</a>
+
+      <div class="event-detail__actions">
+        <button
+          class="btn btn--secondary"
+          [routerLink]="['/events', event.id, 'edit']"
+        >
+          Edit Event
+        </button>
+        <button class="btn btn--danger" (click)="deleteEvent()">
+          Delete
+        </button>
+      </div>
+    </div>
+
+    <div class="event-detail__hero">
+      <img
+        [src]="event.imageUrl"
+        [alt]="event.title"
+        class="event-detail__image"
+      />
+
+      <div class="event-detail__overlay">
+        <span class="event-detail__category">
+          {{ getCategoryLabel(event.category) }}
+        </span>
+        <h1 class="event-detail__title">{{ event.title }}</h1>
+        <p class="event-detail__venue">📍 {{ event.venue }}</p>
+      </div>
+    </div>
+
+    <div class="event-detail__content">
+      <div class="event-detail__main">
+        <section class="event-detail__section">
+          <h2>About this Event</h2>
+          <p>{{ event.description }}</p>
+        </section>
+
+        <section class="event-detail__section">
+          <h2>Event Details</h2>
+          <dl class="event-detail__info">
+            <div class="event-detail__info-item">
+              <dt>Date & Time</dt>
+              <dd>{{ formatDate(event.date) }}</dd>
+            </div>
+
+            <div class="event-detail__info-item">
+              <dt>Venue</dt>
+              <dd>{{ event.venue }}</dd>
+            </div>
+
+            <div class="event-detail__info-item">
+              <dt>Category</dt>
+              <dd>{{ getCategoryLabel(event.category) }}</dd>
+            </div>
+
+            <div class="event-detail__info-item">
+              <dt>Status</dt>
+              <dd>
+                <span
+                  class="event-detail__status"
+                  [attr.data-status]="event.status"
+                >
+                  {{ event.status }}
+                </span>
+              </dd>
+            </div>
+          </dl>
+        </section>
+      </div>
+
+      <aside class="event-detail__sidebar">
+        <div class="event-detail__card">
+          <div class="event-detail__price">
+            €{{ event.ticketPrice }}
+          </div>
+
+          <div class="event-detail__seats">
+            @if (event.availableSeats > 0) {
+              <span>{{ event.availableSeats }} seats available</span>
+            } @else {
+              <span class="sold-out">Sold Out</span>
+            }
+          </div>
+
+          @if (countdown) {
+            <div class="event-detail__countdown">
+              <h3>Event starts in:</h3>
+
+              <div class="countdown">
+                <div class="countdown__item">
+                  <span class="countdown__value">{{ countdown.days }}</span>
+                  <span class="countdown__label">Days</span>
+                </div>
+                <div class="countdown__item">
+                  <span class="countdown__value">{{ countdown.hours }}</span>
+                  <span class="countdown__label">Hours</span>
+                </div>
+                <div class="countdown__item">
+                  <span class="countdown__value">{{ countdown.minutes }}</span>
+                  <span class="countdown__label">Min</span>
+                </div>
+                <div class="countdown__item">
+                  <span class="countdown__value">{{ countdown.seconds }}</span>
+                  <span class="countdown__label">Sec</span>
+                </div>
+              </div>
+            </div>
+          }
+
+          <button
+            class="btn btn--primary btn--lg btn--full"
+            [disabled]="event.availableSeats === 0"
+          >
+            {{ event.availableSeats > 0 ? 'Book Tickets' : 'Sold Out' }}
+          </button>
+        </div>
+      </aside>
+    </div>
+  </div>
+}
+
+@if (!event && !error) {
+  <div class="loading">
+    <div class="loading__spinner"></div>
+    <p>Loading event...</p>
+  </div>
+}
+
+@if (error) {
+  <div class="error">
+    <h2>Event not found</h2>
+    <p>{{ error }}</p>
+    <a routerLink="/" class="btn btn--primary">Back to Events</a>
+  </div>
+}
