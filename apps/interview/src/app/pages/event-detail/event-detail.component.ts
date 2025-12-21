@@ -47,7 +47,6 @@ export class EventDetailComponent implements OnInit, OnDestroy {
     .subscribe({
       next: (event) => {
         this.event = event ?? null;
-
         if (this.event) {
           this.startCountdown();
         }

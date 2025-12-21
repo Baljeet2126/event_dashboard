@@ -2,7 +2,6 @@
 import {
   Component,
   ChangeDetectionStrategy,
-  Signal,
   input,
   output,
 } from '@angular/core';
@@ -26,7 +25,7 @@ import {
 export class EventCardComponent {
   // ----- inputs -----
   cultureEvent = input.required<CulturalEvent>();
- isFavorite = input<boolean>(false); 
+  isFavorite = input<boolean>(false); 
 
   // ----- outputs -----
   onEdit = output<CulturalEvent>();
