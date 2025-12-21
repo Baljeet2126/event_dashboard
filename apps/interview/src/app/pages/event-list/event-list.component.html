@@ -52,12 +52,16 @@
     @if (showGrid()) {
       <div class="event-grid">
         @for (event of filteredEvents(); track event.id) {
-          <app-event-card
-            [cultureEvent]="event"
-            (onEdit)="editEvent($event)"
-            (onDelete)="deleteEvent($event)"
-            (onToggleStatus)="toggleStatus($event)"
-          />
+         <app-event-card
+          [cultureEvent]="event"
+          
+          (favoriteClick)="onFavoriteClick(event.id)"
+          (toggleFavorite)="onFavoriteClick($event)"
+          (onEdit)="editEvent($event)"
+          (onDelete)="deleteEvent($event)"
+          (onToggleStatus)="toggleStatus($event)" 
+          [isFavorite]="isFavorite(event.id)"
+        />
         }
       </div>
     }

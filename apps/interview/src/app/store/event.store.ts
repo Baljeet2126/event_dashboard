@@ -4,8 +4,9 @@ import {
   CulturalEvent,
   DEFAULT_FILTERS,
   EventFilters,
-} from '../models/event.model';
-import { EventApiService } from '../services/event-api.service';
+  EventApiService
+} from '@shared';
+
 
 /**
  * Event Store
@@ -18,7 +19,7 @@ interface EventState {
   selectedEventId: string | null;
   loading: boolean;
   error: string | null;
-  favorites: Set<string>;
+
 }
 
 const initialState: EventState = {
@@ -27,9 +28,6 @@ const initialState: EventState = {
   selectedEventId: null,
   loading: false,
   error: null,
-  favorites: new Set(
-    JSON.parse(localStorage.getItem('favorites') ?? '[]')
-  ),
 };
 
 @Injectable({
@@ -221,29 +219,6 @@ export class EventStore {
 
       return true;
     });
-  }
-
-  readonly favorites$ = this.state$.pipe(
-  map(state => state.favorites)
-);
-
-isFavorite(id: string): boolean {
-  return this.state$.getValue().favorites.has(id);
-}
-
-  toggleFavorite(id: string): void {
-    const favorites = new Set(this.state$.getValue().favorites);
-
-    favorites.has(id)
-      ? favorites.delete(id)
-      : favorites.add(id);
-
-    localStorage.setItem(
-      'favorites',
-      JSON.stringify([...favorites])
-    );
-
-    this.patchState({ favorites });
   }
 
   private sortByDate(events: CulturalEvent[]): CulturalEvent[] {

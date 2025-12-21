@@ -13,7 +13,7 @@ import {
   EventCategory,
   EventStatus,
   STATUS_LABELS,
-} from '../../models/event.model';
+} from '@shared';
 import { EventStore } from '../../store/event.store';
 
 @Component({

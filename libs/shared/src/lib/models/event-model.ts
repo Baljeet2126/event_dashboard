@@ -1,3 +1,4 @@
+// libs/shared/src/lib/models/event-model.ts
 export interface CulturalEvent {
   id: string;
   title: string;

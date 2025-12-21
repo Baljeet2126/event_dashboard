@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { delay, Observable, of, throwError } from 'rxjs';
 import { MOCK_EVENTS } from '../data/mock-events';
-import { CulturalEvent } from '../models/event.model';
+import { CulturalEvent } from '@shared';
 
 /**
  * Simulates an API service for cultural events.

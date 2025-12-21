@@ -9,8 +9,8 @@ import {
 } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { CATEGORY_LABELS, CulturalEvent } from '../../models/event.model';
 import { EventStore } from '../../store/event.store';
+import { formatDate,CATEGORY_LABELS, CulturalEvent } from '@shared';
 
 @Component({
   selector: 'app-event-detail',
@@ -69,15 +69,8 @@ export class EventDetailComponent implements OnInit, OnDestroy {
     return CATEGORY_LABELS[category];
   }
 
-  formatDate(date: Date): string {
-    return new Intl.DateTimeFormat('en-US', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: '2-digit',
-      minute: '2-digit',
-    }).format(new Date(date));
+ formattedDate(eventDate:Date): string {
+    return formatDate(eventDate);
   }
 
   deleteEvent(): void {

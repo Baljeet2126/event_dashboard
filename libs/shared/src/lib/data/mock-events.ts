@@ -1,4 +1,4 @@
-import { CulturalEvent } from '../models/event.model';
+import { CulturalEvent } from '@shared';
 
 export const MOCK_EVENTS: CulturalEvent[] = [
   {

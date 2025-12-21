@@ -16,7 +16,7 @@ import {
   EventFilters,
   EventStatus,
   STATUS_LABELS,
-} from '../../models/event.model';
+} from '@shared';
 
 interface FilterOption<T> {
   value: T;

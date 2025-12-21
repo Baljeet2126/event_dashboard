@@ -15,15 +15,15 @@
 
     <button
       class="event-card__favorite"
-      [class.event-card__favorite--active]="isFavorite(cultureEvent().id)"
-      (click)="toggleFavorite($event, cultureEvent().id)"
+      [class.event-card__favorite--active]="isFavorite()"
+      (click)="onFavoriteClick($event)"
       [attr.aria-label]="
-        isFavorite(cultureEvent().id)
+        isFavorite()
           ? 'Remove from favorites'
           : 'Add to favorites'
       "
     >
-      {{ isFavorite(cultureEvent().id) ? '★' : '☆' }}
+      {{ isFavorite() ? '★' : '☆' }}
     </button>
   </div>
 
@@ -37,7 +37,7 @@
       </span>
 
       <span class="event-card__date">
-        {{ formatDate(cultureEvent().date) }}
+        {{ formattedDate(cultureEvent().date) }}
       </span>
     </div>
 
