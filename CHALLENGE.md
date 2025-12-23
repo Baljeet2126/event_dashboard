@@ -191,7 +191,7 @@ Implemented debounced search to reduce unnecessary filter updates and improve pe
 
 Search input updates filters only after a short delay, providing a smoother UX.
 
-Trade-offs & Future Improvements
+### Trade-offs & Future Improvements
 
 The existing RxJS store was retained to keep the refactor focused and discussable.
 
