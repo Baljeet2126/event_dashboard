@@ -163,17 +163,19 @@ This improved template readability and aligns with Angular’s modern best pract
 Part 3: Architecture (Nx Monorepo)
 
 To make the codebase scalable and align with Nx best practices, reusable code was extracted from apps/interview into libraries under libs/.
-
+```
 Library Structure
 libs/
 ├─ shared/
-│  ├─ util-models        # Domain models (CulturalEvent, filters, enums)
-│  └─ util-formatting    # Pure utilities (date formatting, helpers)
+│  ├─ components        # Reusable UI components (EventCard, EventFilter)
+   |    ├─event-card
+   |    ├─event-filter
+  └─ data   # Pure utilities (mock data)
+  └─ models
+   └─ services
+  └─ utilities
 │
-└─ events/
-   ├─ data-access        # EventStore, API services, business logic
-   └─ ui                 # Reusable UI components (EventCard, EventFilter)
-
+```
 ### Architectural Decisions
 
 Models and utilities are framework-agnostic and shared across the app.
